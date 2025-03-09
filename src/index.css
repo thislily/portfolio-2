@@ -51,6 +51,12 @@
 body{
     color: var(--clr-black);
     background-color: var(--clr-shell);
+    transition: background-color 1s ease, color 1s ease;
+}
+
+/* Light mode with pale blue background */
+body.light-mode {
+    background-color: #E8F4FF;
 }
 
 /* TEXT */
@@ -114,6 +120,12 @@ a:hover{
     backdrop-filter: blur(8px);
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
     width: fit-content;
+    transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+    z-index: 100;
+}
+
+.mode-selector:hover {
+    transform: translateY(-5px);
 }
   
 .mode-icon {
@@ -123,6 +135,7 @@ a:hover{
     transition: transform 0.2s ease, opacity 0.2s ease;
     opacity: 0.6;
     padding: 8px;
+    transform-origin: center center;
 }
   
 .mode-icon:hover {
@@ -133,6 +146,12 @@ a:hover{
 .mode-icon.active-mode {
     opacity: 1;
     transform: scale(1.15);
+    animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1.15); }
+    50% { transform: scale(1.25); }
 }
   
 .mode-icon img {
@@ -159,7 +178,7 @@ body.party-mode .mode-icon[aria-label="Party Mode"] {
 /* SPLASH */
 .splash{
     background-color: var(--clr-feather);
-    padding: 64px 16px;
+    padding: 40px 16px; /* Reduced top padding */
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -180,6 +199,7 @@ body.party-mode .mode-icon[aria-label="Party Mode"] {
     height: 304px;
     border-radius: 50%;
     border: var(--clr-willow) solid 6px;
+    transition: transform 0.5s cubic-bezier(0.215, 0.610, 0.355, 1), border 0.3s ease;
 }
 
 .welcome-p p{
@@ -191,20 +211,41 @@ body.party-mode .mode-icon[aria-label="Party Mode"] {
     gap: 120px;
 }
 
+.directory a {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.directory a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--clr-sunset);
+    transition: width 0.3s ease;
+}
+
+.directory a:hover::after {
+    width: 100%;
+}
+
 /* PORTFOLIO */
 .portfolio{
     margin: 0 auto;
-    padding: 80px 16px;
+    padding: 60px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 48px;
+    gap: 40px; /* Increased gap between cards for better separation */
+    perspective: 1000px;
 }
 
 .card{
     width: 90%;
-    max-width: 800px;
-    padding: 32px;
+    max-width: 900px;
+    padding: 40px;
     border: var(--clr-bisque) 1px solid;
     box-shadow: var(--bs-shadow-light);
     display: flex;
@@ -212,18 +253,36 @@ body.party-mode .mode-icon[aria-label="Party Mode"] {
     align-items: center;
     justify-content: center;
     background-color: var(--clr-white);
+    transition: transform 0.4s cubic-bezier(0.215, 0.610, 0.355, 1), 
+                box-shadow 0.4s cubic-bezier(0.215, 0.610, 0.355, 1);
+    will-change: transform;
+    margin: 0 auto 20px; /* Bottom margin only */
+    position: relative;
+    overflow: hidden; /* Keep background contained */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--bs-shadow-med);
 }
 
 .card img {
     aspect-ratio: 16 / 9;
-    max-width: 448px;
+    max-width: 400px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .card-text{
-    height: 304px;
+    min-height: 304px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    max-width: 400px;
+    position: relative;
+    z-index: 2;
 }
 
 .links{
@@ -235,11 +294,23 @@ body.party-mode .mode-icon[aria-label="Party Mode"] {
 .links a {
     display: flex;
     align-items: center;
+    transition: all 0.2s ease;
+    position: relative;
+    padding-left: 0;
+}
+
+.links a:hover {
+    padding-left: 5px;
 }
 
 .links svg{
     margin-right: 12px;
     font-size: 32px;
+    transition: transform 0.3s ease;
+}
+
+.links a:hover svg {
+    transform: translateX(3px);
 }
 
 /* CONTACT */
@@ -250,6 +321,7 @@ body.party-mode .mode-icon[aria-label="Party Mode"] {
     display: flex;
     flex-direction: column;
     align-items: center;
+    perspective: 1000px;
 }
 
 .contact-text{
@@ -272,6 +344,14 @@ body.party-mode .mode-icon[aria-label="Party Mode"] {
     display: flex;
     gap: 36px;
     margin: 48px auto 0px;
+}
+
+.logos i {
+    transition: all 0.3s ease;
+}
+
+.logos i:hover {
+    color: var(--clr-sunset);
 }
 
 /* DARK-MODE */
@@ -334,6 +414,7 @@ body.party-mode .splash{
 
 body.party-mode .profile-pic{
     border: var(--clr-black) solid 6px;
+    animation: float 4s ease-in-out infinite;
 }
 
 body.party-mode .welcome-p{
@@ -341,51 +422,12 @@ body.party-mode .welcome-p{
 }
 
 body.party-mode .portfolio{
-    gap: 0px;
-    padding: 56px 0px;
+    gap: 40px !important; /* Match standard gap */
+    padding: 60px 16px !important;
 }
 
 body.party-mode .portfolio h2{
-    margin: 56px auto;
-}
-
-body.party-mode .card-1{
-    background-image: url(/images/card-1-blob.svg);
-    max-width: 1008px;
-    height: 496px;
-}
-
-body.party-mode .card-2{
-    background-image: url(/images/card-2-blob.svg);
-    max-width: 1008px;
-    height: 492px;
-}
-
-body.party-mode .card-3{
-    background-image: url(/images/card-3-blob.svg);
-    max-width: 1008px;
-    height: 476px;
-}
-
-body.party-mode .card {
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    box-shadow: none;
-    padding: 0px;
-    border: none;
-    background-color: transparent;
-}
-
-body.party-mode .card img {
-    box-shadow: var(--bs-shadow-med);
-    margin-left: 16px;
-}
-
-body.party-mode .card-text{
-    max-width: 400px;
+    margin: 0px auto 24px; /* Adjusted margin for spacing */
 }
 
 body.party-mode .contact{
@@ -401,6 +443,129 @@ body.party-mode .contact a:hover{
     color: var(--clr-magenta);
 }
 
+body.party-mode .logos i:hover {
+    color: var(--clr-magenta);
+}
+
+body.party-mode .links svg:hover{
+    background-color: var(--clr-royal);
+}
+
+/* PARTY-MODE CARD SPECIFIC STYLING */
+body.party-mode .card {
+    width: 90%;
+    max-width: 900px;
+    background-color: transparent !important;
+    position: relative !important;
+    padding: 60px 40px !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 auto 20px !important; /* Match standard margin */
+    height: auto;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    overflow: visible !important; /* Allow the blobs to extend beyond card boundaries */
+    isolation: isolate; /* Create stacking context */
+}
+
+/* SVG background positioning fixes */
+body.party-mode .card > div:first-child {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 0 !important; /* Behind content */
+    overflow: visible !important; /* Allow the blobs to extend beyond card boundaries */
+}
+
+body.party-mode .card svg {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: visible !important;
+}
+
+/* Force card to use flex layout */
+body.party-mode .card {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 32px !important;
+}
+
+/* Force content visibility */
+body.party-mode .card img,
+body.party-mode .card h3,
+body.party-mode .card p,
+body.party-mode .card a,
+body.party-mode .card .links,
+body.party-mode .card .card-text {
+    position: relative !important;
+    z-index: 10 !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+body.party-mode .card .links {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+body.party-mode .card a {
+    display: flex !important;
+    align-items: center !important;
+}
+
+body.party-mode .card a svg {
+    position: static !important; /* Override SVG positioning for icons */
+    width: 32px !important;
+    height: 32px !important;
+    margin-right: 12px !important;
+    overflow: visible !important;
+}
+
+body.party-mode .card img {
+    max-width: 400px;
+    height: auto;
+    z-index: 10;
+}
+
+body.party-mode .card-text {
+    min-height: auto !important; /* Allow natural height */
+    z-index: 10;
+}
+
+/* ANIMATIONS */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 /* MEDIA QUERIES */
 @media screen and (max-width: 900px){
     h1{
@@ -413,6 +578,7 @@ body.party-mode .contact a:hover{
 
     .splash{
         gap: 24px;
+        padding-top: 30px !important; /* Reduced padding on smaller screens */
     }
 
     .welcome-p {
@@ -428,15 +594,22 @@ body.party-mode .contact a:hover{
     .directory{
         gap: 36px;
     }
+    
+    .portfolio {
+        gap: 30px; /* Reduce gap on smaller screens */
+    }
 
     .card{
         flex-direction: column-reverse;
-        max-width: 480px;
+        max-width: 520px;
         width: 100%;
+        padding: 36px;
     }
 
     .card-text{
-        max-width: 448px;
+        max-width: 480px;
+        width: 100%;
+        min-height: auto;
     }
 
     .portfolio h2{
@@ -452,43 +625,45 @@ body.party-mode .contact a:hover{
     }
 
     body.party-mode .portfolio{
-        gap: 24px;
+        gap: 30px !important; /* Match standard smaller screen gap */
     }
 
     body.party-mode .portfolio h2{
-        margin:36px auto 16px;
-    }
-
-    body.party-mode .card img{
-        width: 90%;
-        margin: 0px;
-    }
-
-    body.party-mode .card-1{
-        background-image: url(/images/card-1-blob-mobile.svg);
-        height: 700px;
-        max-width: 700px;
+        margin: 0px auto 20px; /* Reduced margin on smaller screens */
     }
     
-    body.party-mode .card-2{
-        background-image: url(/images/card-2-blob-mobile.svg);
-        height: 700px;
-        max-width: 700px;
+    /* Make party mode use same responsive layout as light/dark mode */
+    body.party-mode .card {
+        flex-direction: column-reverse !important;
+        max-width: 520px !important;
+        width: 100% !important;
+        padding: 36px !important;
     }
     
-    body.party-mode .card-3{
-        background-image: url(/images/card-3-blob-mobile.svg);
-        height: 700px;
-        max-width: 700px;
+    body.party-mode .card-text {
+        max-width: 480px !important;
+        width: 100% !important;
+        min-height: auto !important;
     }
-
-    body.party-mode .card-text{
-        width: 90%;
-        max-width: 400px;
+    
+    body.party-mode .card img {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    /* Make svg backgrounds extend beyond screen edges */
+    body.party-mode .card > div:first-child {
+        left: -30px !important;
+        right: -30px !important;
+        width: calc(100% + 60px) !important;
     }
 }
 
 @media screen and (max-width: 500px){
+    .portfolio {
+        gap: 25px; /* Further reduce gap on very small screens */
+    }
+
     .card img{
         max-width: 360px;
     }
@@ -498,4 +673,28 @@ body.party-mode .contact a:hover{
         height: 1090px;
         background-image: url(/images/splash-blob-mobile.svg);
     }
+    
+    body.party-mode .portfolio{
+        gap: 25px !important; /* Match standard very small screen gap */
+    }
+    
+    body.party-mode .card {
+        padding: 30px 20px !important; /* Less padding on very small screens */
+    }
+    
+    /* Further extend backgrounds beyond screen on very small screens */
+    body.party-mode .card > div:first-child {
+        left: -50px !important;
+        right: -50px !important;
+        width: calc(100% + 100px) !important;
+    }
+}
+
+/* PARALLAX AND SCROLL */
+html {
+    scroll-behavior: smooth;
+}
+
+.splash, .contact, .portfolio {
+    perspective: 1000px;
 }
