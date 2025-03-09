@@ -1,5 +1,8 @@
 // src/components/Portfolio.jsx
 import React from "react";
+//eslint-disable-next-line
+import { motion } from "framer-motion";
+import { Parallax } from "react-scroll-parallax";
 import ProjectCard from "./ProjectCard";
 
 function Portfolio() {
@@ -53,10 +56,19 @@ function Portfolio() {
 
   return (
     <section className="portfolio" id="portfolio">
-      <h2>Here's some projects I've worked on:</h2>
+      <Parallax speed={0}>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7 }}
+        >
+          Here's some projects I've worked on:
+        </motion.h2>
+      </Parallax>
 
       {projects.map((project, index) => (
-        <ProjectCard 
+        <ProjectCard
           key={index}
           title={project.title}
           description={project.description}
