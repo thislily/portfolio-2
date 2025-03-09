@@ -1,4 +1,9 @@
-// src/components/Contact.jsx
+/**
+ * @file Contact component
+ * renders contact information and links
+ * animated with framer-motion and react-scroll-parallax
+ */
+
 import React from "react";
 //eslint-disable-next-line
 import { motion } from "framer-motion";

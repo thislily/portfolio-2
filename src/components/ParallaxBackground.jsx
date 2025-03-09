@@ -1,31 +1,42 @@
-// src/components/ParallaxBackground.jsx
-import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+/**
+ * @name ParallaxBackground.jsx
+ * This component creates a parallax effect with a background that changes based on the mode.
+ * It uses the framer-motion library for animations and the useScroll and useTransform hooks for parallax effects.
+ *
+ */
+
+import React, { useEffect, useState } from "react";
+//eslint-disable-next-line
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const ParallaxBackground = ({ mode }) => {
-  const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
-  const [height, setHeight] = useState(typeof window !== 'undefined' ? window.innerHeight : 0);
+  const [width, setWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 0
+  );
+  const [height, setHeight] = useState(
+    typeof window !== "undefined" ? window.innerHeight : 0
+  );
   const { scrollY } = useScroll();
-  
+
   // Different transforms based on scroll position
   const y1 = useTransform(scrollY, [0, height], [0, height * 0.15]);
   const y2 = useTransform(scrollY, [0, height], [0, height * -0.1]);
   const y3 = useTransform(scrollY, [0, height], [0, height * 0.05]);
   const y4 = useTransform(scrollY, [0, height], [0, height * -0.08]);
   const y5 = useTransform(scrollY, [0, height], [0, height * 0.12]);
-  
+
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
       setHeight(window.innerHeight);
     };
-    
-    window.addEventListener('resize', handleResize);
+
+    window.addEventListener("resize", handleResize);
     handleResize(); // Call once initially to ensure proper setup
-    
-    return () => window.removeEventListener('resize', handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
-  
+
   // Simpler cloud rendering for light mode
   const renderClouds = () => {
     // Cloud data
@@ -48,12 +59,13 @@ const ParallaxBackground = ({ mode }) => {
       { x: 20, y: 75, size: 180, opacity: 0.75, motion: y2 },
       { x: 80, y: 80, size: 160, opacity: 0.8, motion: y1 },
       { x: 40, y: 85, size: 150, opacity: 0.85, motion: y5 },
-      { x: 60, y: 90, size: 140, opacity: 0.75, motion: y4 }
+      { x: 60, y: 90, size: 140, opacity: 0.75, motion: y4 },
     ];
-    
+
     // Simple cloud path
-    const cloudPath = "M 0,20 C 15,0 40,-5 65,10 C 90,-5 115,5 130,25 C 150,10 165,35 155,60 C 170,85 140,105 115,95 C 95,115 65,110 45,90 C 25,105 0,90 -10,65 C -30,50 -15,25 0,20 Z";
-    
+    const cloudPath =
+      "M 0,20 C 15,0 40,-5 65,10 C 90,-5 115,5 130,25 C 150,10 165,35 155,60 C 170,85 140,105 115,95 C 95,115 65,110 45,90 C 25,105 0,90 -10,65 C -30,50 -15,25 0,20 Z";
+
     return (
       <>
         {/* Sun */}
@@ -65,7 +77,7 @@ const ParallaxBackground = ({ mode }) => {
             fill="#FFD580"
             opacity={0.9}
           />
-          
+
           {/* Sun glow - inside the motion.g so it moves with the sun */}
           <circle
             cx={width * 0.15}
@@ -79,27 +91,27 @@ const ParallaxBackground = ({ mode }) => {
               <stop offset="100%" stopColor="#FFD580" stopOpacity="0" />
             </radialGradient>
           </defs>
-          
+
           {/* Sun rays - inside the same motion.g */}
-          <motion.g 
+          <motion.g
             animate={{ rotate: 360 }}
             transition={{
               duration: 120,
               repeat: Infinity,
-              ease: "linear"
+              ease: "linear",
             }}
             style={{
               transformOrigin: `${width * 0.15}px ${height * 0.2}px`,
-              opacity: 0.6
+              opacity: 0.6,
             }}
           >
             {Array.from({ length: 12 }).map((_, i) => {
-              const angle = (i * 30) * Math.PI / 180;
+              const angle = (i * 30 * Math.PI) / 180;
               const x1 = width * 0.15 + Math.cos(angle) * width * 0.07;
               const y1 = height * 0.2 + Math.sin(angle) * width * 0.07;
               const x2 = width * 0.15 + Math.cos(angle) * width * 0.1;
               const y2 = height * 0.2 + Math.sin(angle) * width * 0.1;
-              
+
               return (
                 <line
                   key={`ray-${i}`}
@@ -120,30 +132,36 @@ const ParallaxBackground = ({ mode }) => {
         {cloudPositions.map((cloud, i) => {
           const x = (width * cloud.x) / 100;
           const y = (height * cloud.y) / 100;
-          
+
           // Skip clouds that would overlap the top half of the sun
           if (
-            x > width * 0.05 && x < width * 0.25 && 
-            y < height * 0.2 && y > height * 0.05
+            x > width * 0.05 &&
+            x < width * 0.25 &&
+            y < height * 0.2 &&
+            y > height * 0.05
           ) {
             return null;
           }
-          
+
           return (
-            <motion.g 
-              key={`cloud-${i}`} 
+            <motion.g
+              key={`cloud-${i}`}
               style={{ y: cloud.motion }}
               initial={{ opacity: 0 }}
-              animate={{ 
-                opacity: [cloud.opacity * 0.9, cloud.opacity, cloud.opacity * 0.95],
+              animate={{
+                opacity: [
+                  cloud.opacity * 0.9,
+                  cloud.opacity,
+                  cloud.opacity * 0.95,
+                ],
               }}
               transition={{
                 opacity: {
                   duration: 3 + (i % 3),
                   repeat: Infinity,
-                  repeatType: "reverse"
+                  repeatType: "reverse",
                 },
-                duration: 1.5
+                duration: 1.5,
               }}
             >
               <path
@@ -158,7 +176,7 @@ const ParallaxBackground = ({ mode }) => {
       </>
     );
   };
-  
+
   // Night sky with moon and stars for dark mode
   const renderNightSky = () => {
     // Generate stars with fixed positions
@@ -169,10 +187,10 @@ const ParallaxBackground = ({ mode }) => {
         y: Math.floor(Math.random() * height),
         size: Math.random() * 3 + 1,
         opacity: Math.random() * 0.5 + 0.3,
-        delay: Math.random() * 5
+        delay: Math.random() * 5,
       });
     }
-    
+
     return (
       <>
         {/* Moon */}
@@ -204,7 +222,7 @@ const ParallaxBackground = ({ mode }) => {
             fill="#444"
             opacity={0.1}
           />
-          
+
           {/* Moon glow - inside the motion.g so it moves with the moon */}
           <circle
             cx={width * 0.85}
@@ -219,7 +237,7 @@ const ParallaxBackground = ({ mode }) => {
             </radialGradient>
           </defs>
         </motion.g>
-        
+
         {/* Stars */}
         {starPositions.map((star, i) => (
           <motion.circle
@@ -229,21 +247,21 @@ const ParallaxBackground = ({ mode }) => {
             r={star.size}
             fill="white"
             initial={{ opacity: star.opacity }}
-            animate={{ 
+            animate={{
               opacity: [star.opacity, star.opacity * 0.3, star.opacity],
-              scale: [1, 1.2, 1]
+              scale: [1, 1.2, 1],
             }}
             transition={{
               duration: 3,
               repeat: Infinity,
               delay: star.delay,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           />
         ))}
-        
+
         {/* Star clusters */}
-        <motion.g 
+        <motion.g
           style={{ y: y3 }}
           opacity={0.9}
           transform={`translate(${width * 0.2}, ${height * 0.3})`}
@@ -254,8 +272,8 @@ const ParallaxBackground = ({ mode }) => {
           <circle cx="15" cy="-3" r="1.8" fill="white" />
           <circle cx="-8" cy="-7" r="2" fill="white" />
         </motion.g>
-        
-        <motion.g 
+
+        <motion.g
           style={{ y: y4 }}
           opacity={0.8}
           transform={`translate(${width * 0.7}, ${height * 0.6})`}
@@ -266,8 +284,8 @@ const ParallaxBackground = ({ mode }) => {
           <circle cx="12" cy="-5" r="2" fill="white" />
           <circle cx="-10" cy="-8" r="1.5" fill="white" />
         </motion.g>
-        
-        <motion.g 
+
+        <motion.g
           style={{ y: y2 }}
           opacity={0.7}
           transform={`translate(${width * 0.4}, ${height * 0.7})`}
@@ -280,22 +298,22 @@ const ParallaxBackground = ({ mode }) => {
       </>
     );
   };
-  
+
   // Render background based on mode
   const renderBackground = () => {
-    if (mode === 'light-mode') {
+    if (mode === "light-mode") {
       return renderClouds();
-    } else if (mode === 'dark-mode') {
+    } else if (mode === "dark-mode") {
       return renderNightSky();
     }
-    
+
     return null;
   };
-  
-  if (mode === 'party-mode') {
+
+  if (mode === "party-mode") {
     return null;
   }
-  
+
   return (
     <div className="parallax-background">
       <svg
@@ -303,11 +321,11 @@ const ParallaxBackground = ({ mode }) => {
         height={height}
         viewBox={`0 0 ${width} ${height}`}
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           left: 0,
           zIndex: -1,
-          pointerEvents: 'none'
+          pointerEvents: "none",
         }}
       >
         {renderBackground()}

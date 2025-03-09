@@ -1,5 +1,11 @@
-// src/components/PartyConfetti.jsx
+/**
+ * @name PartyConfetti
+ * @description This file contains the PartyConfetti component.
+ * It is a simple component that renders colorful confetti particles that fall from the top of the screen.
+ * The particles are animated using Framer Motion.
+ */
 import React, { useEffect, useState } from 'react';
+//eslint-disable-next-line
 import { motion } from 'framer-motion';
 
 const PartyConfetti = () => {

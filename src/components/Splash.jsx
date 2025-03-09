@@ -1,4 +1,11 @@
-// src/components/Splash.jsx
+/**
+ * @name Splash
+ * @description This file contains the Splash component.
+ * It is a simple component that renders the splash section of the portfolio.
+ * The splash section contains a greeting, an introduction, and links to the contact and portfolio sections.
+ * The component is animated using Framer Motion and React Scroll Parallax.
+ *
+ */
 import React from "react";
 //eslint-disable-next-line
 import { motion } from "framer-motion";
@@ -16,7 +23,7 @@ function Splash({ profilePicSrc }) {
           Hi friend, I'm Lily!
         </motion.h1>
       </Parallax>
-      
+
       <div className="welcome-p">
         <Parallax speed={0}>
           <motion.img
@@ -26,13 +33,13 @@ function Splash({ profilePicSrc }) {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            whileHover={{ 
+            whileHover={{
               scale: 1.05,
-              transition: { duration: 0.2 }
+              transition: { duration: 0.2 },
             }}
           />
         </Parallax>
-        
+
         <Parallax speed={0}>
           <motion.p
             initial={{ opacity: 0, x: 50 }}
@@ -52,26 +59,26 @@ function Splash({ profilePicSrc }) {
       </div>
 
       <Parallax speed={0}>
-        <motion.div 
+        <motion.div
           className="directory"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          <motion.a 
+          <motion.a
             href="#contact"
-            whileHover={{ 
-              scale: 1.1, 
-              transition: { duration: 0.2 }, 
+            whileHover={{
+              scale: 1.1,
+              transition: { duration: 0.2 },
             }}
           >
             Contact Me
           </motion.a>
-          <motion.a 
+          <motion.a
             href="#portfolio"
-            whileHover={{ 
-              scale: 1.1, 
-              transition: { duration: 0.2 } 
+            whileHover={{
+              scale: 1.1,
+              transition: { duration: 0.2 },
             }}
           >
             See My Work

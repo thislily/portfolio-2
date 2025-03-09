@@ -1,6 +1,17 @@
-// src/App.jsx
+/**
+ * @name App
+ * @description This file contains the App component.
+ * It is the root component of the portfolio.
+ * The App component contains the ModeSelector, Splash, Portfolio, and Contact components.
+ * The App component also contains the ParallaxProvider and AnimatePresence components.
+ * The App component manages the current mode of the portfolio.
+ * The App component is responsible for applying the theme class to the body.
+ * The App component updates the profile picture based on the current mode.
+ * The App component is animated using Framer Motion and React Scroll Parallax.
+ *
+ */
 import { useState, useEffect } from "react";
-import { ParallaxProvider } from 'react-scroll-parallax';
+import { ParallaxProvider } from "react-scroll-parallax";
 import { AnimatePresence } from "framer-motion";
 import "devicon/devicon.min.css";
 import "./index.css";
@@ -39,8 +50,11 @@ function App() {
     <ParallaxProvider>
       <AnimatePresence mode="wait">
         <ParallaxBackground mode={currentMode} key={`bg-${currentMode}`} />
-        {currentMode === 'party-mode' && <PartyConfetti key="party-confetti" />}
-        <ModeSelector currentMode={currentMode} setCurrentMode={setCurrentMode} />
+        {currentMode === "party-mode" && <PartyConfetti key="party-confetti" />}
+        <ModeSelector
+          currentMode={currentMode}
+          setCurrentMode={setCurrentMode}
+        />
         <Splash profilePicSrc={profilePicSrc} />
         <Portfolio />
         <Contact />
