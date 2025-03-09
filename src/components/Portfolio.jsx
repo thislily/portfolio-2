@@ -1,4 +1,9 @@
-// src/components/Portfolio.jsx
+/**
+ * @file Portfolio.jsx
+ * @description This file contains the Portfolio component.
+ * It is a simple component that renders a list of projects using the ProjectCard component.
+ */
+
 import React from "react";
 //eslint-disable-next-line
 import { motion } from "framer-motion";
@@ -8,17 +13,35 @@ import ProjectCard from "./ProjectCard";
 function Portfolio() {
   const projects = [
     {
+      title: "Holidaze",
+      description: "A pretend venue site, where users can make venues, and book the venues of others. Built using a school provided API.",
+      image: "images/holidaze.jpg",
+      altText: "a screenshot of the Holidaze homepage",
+      website: "https://lil-holidaze.netlify.app",
+      repo: "https://github.com/thislily/project-exam-2",
+      cardClass: "card-2"
+    },
+    {
       title: "Bidden",
       description: "A pretend auction site where users can create an account, make listings, and bid on items. Built using a school provided API.",
       image: "images/bidden.jpg",
       altText: "a screenshot of the Bidden homepage",
       website: "https://bidden.netlify.app",
       repo: "https://github.com/thislily/Bidden",
+      cardClass: "card-1"
+    },
+    {
+      title: "Storesville",
+      description: "A school project to demonstrate simple use of react.",
+      image: "images/storesville.jpg",
+      altText: "a screenshot of the Storesville homepage",
+      website: "https://storesville.netlify.app",
+      repo: "https://github.com/thislily/js-frameworks",
       cardClass: "card-3"
     },
     {
       title: "Mini Routini!",
-      description: "A cute web app for kids to track their chores and earn a video as a reward. Just a fun little project to practice my skills.",
+      description: "A cute web app for kids to track their chores and earn a video as a reward.",
       image: "images/chores.jpg",
       altText: "a screenshot of the Rainy Days homepage",
       website: "http://www.miniroutini.com",
@@ -35,17 +58,8 @@ function Portfolio() {
       cardClass: "card-1"
     },
     {
-      title: "Rainy Days",
-      description: "A fictional jacket company's e-commerce website. Products are hosted via a Wordpress headless CMS.",
-      image: "images/rainy-days.jpg",
-      altText: "a screenshot of the Rainy Days homepage",
-      website: "https://rainydays-lily.netlify.app",
-      repo: "https://github.com/thislily/Rainy_Days_v2",
-      cardClass: "card-2"
-    },
-    {
       title: "Community Science Museum",
-      description: "A fictional children's science museum website. Completely static site.",
+      description: "A fictional children's science museum website.",
       image: "images/museum.jpg",
       altText: "a screenshot of the Community Science Museum homepage",
       website: "https://csmuseum-lily.netlify.app",

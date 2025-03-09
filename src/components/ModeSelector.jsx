@@ -1,27 +1,38 @@
-// src/components/ModeSelector.jsx
+/**
+ * @name ModeSelector
+ * @description This file contains the ModeSelector component.
+ * It is a simple component that allows the user to switch between light, dark, and party mode.
+ *
+ */
 import React from "react";
 
 function ModeSelector({ currentMode, setCurrentMode }) {
   return (
     <div className="mode-selector">
-      <button 
-        className={`mode-icon ${currentMode === "light-mode" ? "active-mode" : ""}`}
+      <button
+        className={`mode-icon ${
+          currentMode === "light-mode" ? "active-mode" : ""
+        }`}
         onClick={() => setCurrentMode("light-mode")}
         aria-label="Light Mode"
       >
         <img src="images/sun.svg" alt="Light Mode" />
       </button>
-      
-      <button 
-        className={`mode-icon ${currentMode === "dark-mode" ? "active-mode" : ""}`}
+
+      <button
+        className={`mode-icon ${
+          currentMode === "dark-mode" ? "active-mode" : ""
+        }`}
         onClick={() => setCurrentMode("dark-mode")}
         aria-label="Dark Mode"
       >
         <img src="images/moon.svg" alt="Dark Mode" />
       </button>
-      
-      <button 
-        className={`mode-icon ${currentMode === "party-mode" ? "active-mode" : ""}`}
+
+      <button
+        className={`mode-icon ${
+          currentMode === "party-mode" ? "active-mode" : ""
+        }`}
         onClick={() => setCurrentMode("party-mode")}
         aria-label="Party Mode"
       >
