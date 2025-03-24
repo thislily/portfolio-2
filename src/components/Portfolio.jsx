@@ -43,7 +43,7 @@ function Portfolio() {
       title: "Mini Routini!",
       description: "A cute web app for kids to track their chores and earn a video as a reward.",
       image: "images/chores.jpg",
-      altText: "a screenshot of the Rainy Days homepage",
+      altText: "a screenshot of the Mini Routini homepage",
       website: "http://www.miniroutini.com",
       repo: "https://github.com/thislily/Chores",
       cardClass: "card-2"
