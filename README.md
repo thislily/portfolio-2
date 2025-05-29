@@ -1,12 +1,42 @@
-# React + Vite
+# Lily's Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hi there! Welcome to my animated portfolio where I showcase my web development projects and experiments.
 
-Currently, two official plugins are available:
+## ✨ Three Modes to Explore
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **☀️ Light Mode** - Bright and clean with animated clouds
+- **🌙 Dark Mode** - Cozy night sky with twinkling stars  
+- **🎉 Party Mode** - Colorful fun with rainbow gradients and confetti
 
-## Expanding the ESLint configuration
+## 🌱 Featured Projects
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Pick a Plant** - A friendly quiz that helps you find the perfect plant companion
+
+**Holidaze** - A vacation rental platform for booking amazing stays
+
+**Bidden** - An auction site where users can create listings and place bids
+
+**Mini Routini** - A cute chore tracker for kids with video rewards
+
+Plus a few more creative web applications that show my development journey.
+
+## 🛠️ Built With
+
+React • Vite • Framer Motion • Tailwind CSS • React Scroll Parallax
+
+## 🚀 Run Locally
+
+```bash
+git clone https://github.com/thislily/portfolio-2
+npm install
+npm run dev
+```
+
+## 📍 Connect With Me
+
+I'm based in Oslo, Norway and always excited to chat about web development!
+
+- **Email:** lilywatson.dev@gmail.com  
+- **GitHub:** [thislily](https://github.com/thislily)
+
+
