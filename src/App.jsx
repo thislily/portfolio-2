@@ -41,6 +41,8 @@ function App() {
     // Update profile pic based on mode
     if (currentMode === "party-mode") {
       setProfilePicSrc("images/heart-glasses.jpg");
+    } else if (currentMode === "dark-mode") {
+      setProfilePicSrc("images/sleepy-lily.jpg");
     } else {
       setProfilePicSrc("images/glasses.jpg");
     }
