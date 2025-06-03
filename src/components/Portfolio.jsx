@@ -68,7 +68,7 @@ function Portfolio() {
       image: "images/future-blonde.jpg",
       altText: "a screenshot of the Future Blonde blog homepage",
       website: "https://futureblonde.netlify.app",
-      repo: "https://github.com/Noroff-FEU-Assignments/project-exam-1-thislily",
+      repo: "https://github.com/thislily/Future-Blonde",
       cardClass: "card-1",
     },
     {
